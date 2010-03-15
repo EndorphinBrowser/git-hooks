@@ -1,0 +1,30 @@
+git-hooks - A tool to manage Git hooks for multiple git repositories.
+
+Hooks can be very powerful and useful.  Some hooks that can be found include:
+
+- Spell check the commit message.
+- Check that the code builds.
+- Verify that any new files contain a copyright with the current year in it.
+
+Hooks can also be very project specific such as:
+
+- Verify that any new code follows the coding style (this is always different)
+
+or very people specific such as:
+
+- Don't allow me to push after 1am in case I break something.
+- Don't let me commit between 9-5 for projects in ~/personal/ as I shouldn't be working on them.
+
+git-hooks provide a way to manage and share your hooks by allowing for the installation of hooks in three locations:
+ - User hooks that are installed in ~/.git_hooks/
+ - Project hooks that are installed in the git_hooks directory of each project
+ - Global hooks that are specified with the environment variable GLOBAL_GIT_HOOKS.
+ 
+When GLOBAL_GIT_HOOKS is not set it defaults to the git-hooks /contrib/ folder.
+Multiple global hooks directories can be specified by using a space between them.
+
+-- Install
+
+Clone the git-hooks repository and add it to your path.
+
+Inside a project's directory run 'git hooks --install' to change that projects git hooks (which defaults to doing nothing) to use git-hooks hooks.
