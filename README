@@ -23,6 +23,15 @@ git-hooks provide a way to manage and share your hooks by allowing for the insta
 When GLOBAL_GIT_HOOKS is not set it defaults to the git-hooks /contrib/ folder.
 Multiple global hooks directories can be specified by using a space between them.
 
+
+--- Creating hooks
+
+To keep things organized git-hooks looks for scripts in sub directories named after the git hook name.  For example this project has the following pre-commit script in the following location:
+
+git_hooks/pre-commit/bsd
+
+When you run 'git hooks' with no arguments it will list all of the hooks installed on the system.  It will run the hooks with the --about argument to generate the description that is shown.
+
 -- Install
 
 Clone the git-hooks repository and add it to your path.
