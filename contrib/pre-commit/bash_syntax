@@ -1,0 +1,22 @@
+#!/bin/bash
+
+function test_file {
+    file="${1}"
+    head -n 1 "${file}" | grep 'bash' | grep '^#!/' > /dev/null
+    if [ "$?" -eq 0 ] ; then
+        set -e
+        bash -n "${file}"
+        set +e
+    fi
+}
+
+case "${1}" in
+    --about )
+        echo "Check bash shell scripts for syntax errors."
+        ;;
+    * )
+        for file in `git diff-index --cached --name-only HEAD` ; do
+            test_file "${file}"
+        done
+        ;;
+esac
