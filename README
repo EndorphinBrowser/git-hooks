@@ -8,6 +8,8 @@ Hooks can be very powerful and useful.  Some common hooks include:
 
 Hooks can also be very project specific such as:
 
+- Verify that the project still builds
+- Verify that autotests matching the modified files still pass with no errors.
 - Pre-populate the commit message with the 'standard' format.
 - Verify that any new code follows the 'standard' coding style.
 
