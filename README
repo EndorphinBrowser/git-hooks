@@ -19,9 +19,8 @@ or very specific to one person such as:
 git-hooks provide a way to manage and share your hooks by allowing for the installation of hooks in three locations:
  - User hooks that are installed in ~/.git_hooks/
  - Project hooks that are installed in the git_hooks directory inside of each project.
- - Global hooks that are specified with the environment variable GLOBAL_GIT_HOOKS.
- 
-When GLOBAL_GIT_HOOKS is not set it defaults to the git-hooks /contrib/ folder.
+ - Global hooks that are specified with the hooks.global configuration option.
+
 Multiple global hooks directories can be specified by using a space between each path.
 
 For more details on Git Hooks checkout the online documentation at http://www.kernel.org/pub/software/scm/git/docs/githooks.html

@@ -36,11 +36,7 @@ function hook_dirs
     hook="${1}"
     echo "${HOME}/.git_hooks/${hook}"
     echo "${PWD}/git_hooks/${hook}"
-    if [ -z ${GLOBAL_GIT_HOOKS} ] ; then
-        echo "${GHD}/contrib/${hook}"
-    else
-        echo "${GLOBAL_GIT_HOOKS}"
-    fi
+    echo "`git config hooks.global`"/${hook}
 }
 
 function list_hooks_in_dir
