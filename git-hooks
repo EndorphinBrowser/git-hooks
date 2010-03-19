@@ -136,13 +136,15 @@ case $1 in
         install_hooks "$1"
         ;;
     -h|--help )
-        echo "Git Hooks"
-        echo ""
-        echo "Options:"
-        echo "    --install      Show all achievements."
-        echo "    --uninstall    Publish existing achievements and push to origin."
-        echo "    run [cmd]      Run the hooks for cmd such as pre-commit"
-        echo "    (no arguments) Show current hooks"
+        echo 'Git Hooks'
+        echo ''
+        echo 'Options:'
+        echo '    --install      Replace existing hooks in this repository with a call to'
+        echo '                   git hooks run [hook].  Move old hooks directory to hooks.old'
+        echo '    --uninstall    Remove existing hooks in this repository and rename hooks.old'
+        echo '                   back to hooks'
+        echo "    run [cmd]      Run the hooks for cmd (such as pre-commit)"
+        echo "    (no arguments) Show currently installed hooks"
         ;;
     * )
         list_hooks
