@@ -50,7 +50,9 @@ function run_hooks
     shift 1
     for hook in `list_hooks_in_dir "${dir}"`
     do
-        echo -e "@@ Running hook: `basename "${hook}"`"
+        echo -n "@@ Running hook: "
+        echo -n `basename \`dirname "${hook}"\``
+        echo "/`basename "${hook}"`"
         ${hook} "$@"
     done
 }
