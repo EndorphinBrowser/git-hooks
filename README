@@ -24,6 +24,8 @@ git-hooks provide a way to manage and share your hooks by allowing for the insta
 When GLOBAL_GIT_HOOKS is not set it defaults to the git-hooks /contrib/ folder.
 Multiple global hooks directories can be specified by using a space between each path.
 
+For more details on Git Hooks checkout the online documentation at http://www.kernel.org/pub/software/scm/git/docs/githooks.html
+
 --- Creating hooks
 
 To keep things organized git-hooks looks for scripts in sub directories named after the git hook name.  For example this project has the following pre-commit script in the following location:
