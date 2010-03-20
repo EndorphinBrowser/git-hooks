@@ -29,8 +29,6 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-GHD=`dirname \`which git-hooks\``
-
 function hook_dirs
 {
     hook="${1}"
