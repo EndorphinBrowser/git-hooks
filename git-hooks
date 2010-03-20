@@ -47,6 +47,10 @@ function list_hooks_in_dir
 function run_hooks
 {
     dir="${1}"
+    if [[ -z ${dir} || ! -d "${dir}" ]] ; then
+        echo "run_hooks requires a directory name as an argument."
+        return 1
+    fi
     shift 1
     for hook in `list_hooks_in_dir "${dir}"`
     do
@@ -63,6 +67,10 @@ function run_hook
 {
     set -e
     hook=`basename "${1}"`
+    if [ -z ${hook} ] ; then
+        echo "run requires a hook argument"
+        return 1
+    fi
     shift 1
     for dir in `hook_dirs "${hook}"`; do
         if [ ! -d "${dir}" ] ; then
