@@ -82,11 +82,12 @@ function run_hook
 
 function install_hooks
 {
-    if [ ! -d ".git" ] ; then
-        echo "$1 must be run in the same directory as .git/"
+    GITDIR=`git rev-parse --git-dir`
+    if [ ! $? -eq 0 ] ; then
+        echo "$1 must be run inside a git repository"
         return 1
     fi
-    cd .git/
+    cd $GITDIR
     if [ "${1}" = "--install" ] ; then
         mv hooks hooks.old
         mkdir hooks
