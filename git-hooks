@@ -28,10 +28,14 @@
 
 function hook_dirs
 {
-    hook="${1}"
-    echo "${HOME}/.git_hooks/${hook}"
-    echo "${PWD}/git_hooks/${hook}"
-    echo "`git config hooks.global`"/${hook}
+    if [ ! -z "${1}" ] ; then
+        hook="/${1}"
+    else
+        hook=""
+    fi
+    echo "${HOME}/.git_hooks${hook}"
+    echo "${PWD}/git_hooks${hook}"
+    echo "`git config hooks.global`"${hook}
 }
 
 function list_hooks_in_dir
