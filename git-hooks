@@ -34,6 +34,8 @@ function hook_dirs
         hook=""
     fi
     echo "${HOME}/.git_hooks${hook}"
+    GITDIR=`git rev-parse --git-dir`
+    cd $GITDIR/..
     echo "${PWD}/git_hooks${hook}"
     eval echo "`git config hooks.global`"${hook}
 }
