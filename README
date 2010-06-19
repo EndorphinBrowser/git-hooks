@@ -39,6 +39,8 @@ git-hooks provide a way to manage and share your hooks by allowing for the insta
  - User hooks that are installed in ~/.git_hooks/
  - Project hooks that are installed in the git_hooks directory inside of each project.
  - Global hooks that are specified with the hooks.global configuration option.
+     The contrib directory includes a number of useful hooks and can be set by doing the following:
+     git config --global hooks.global $PWD/contrib/
 
 Multiple global hooks directories can be specified by using a space between each path.
 
