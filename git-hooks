@@ -53,6 +53,7 @@ function run_hooks
     shift 1
     for hook in `list_hooks_in_dir "${dir}"`
     do
+        export last_run_hook="${hook} $@"
         if [ ! -z ${GIT_HOOKS_VERBOSE} ] ; then
             echo -n "@@ Running hook: "
             echo -n `basename \`dirname "${hook}"\``
@@ -132,12 +133,18 @@ function list_hooks
     done
 }
 
+function report_error {
+    echo "Hook failed: $last_run_hook"
+    exit 1
+}
+
 case $1 in
     run )
         if [ ! -z "${GIT_DIR}" ] ; then
             unset GIT_DIR
         fi
         shift
+        trap report_error ERR
         run_hook "$@"
         ;;
     --install|--uninstall )
