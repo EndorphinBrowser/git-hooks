@@ -1,12 +1,24 @@
 git-hooks - A tool to manage Git hooks for multiple git repositories.
 
+git-hooks lets hooks be installed inside git repositories, users home directory, and globally.  When a hook is called by git, git-hooks will check each of these locations for the hooks to run.
+
+************************************
+Install
+
+Add git-hooks to your PATH environment variable so 'git hooks' can be run.
+
+Run 'git hooks --install' Inside a git project to change that projects git hooks to use git-hooks hooks.  'git hooks --uninstall' can be run at any time to go back to the old hooks that were installed before (typically the default which does nothing).
+
+************************************
+Overview
+
 Hooks can be very powerful and useful.  Some common hooks include:
 
 - Spell check the commit message.
 - Check that the code builds.
 - Verify that any new files contain a copyright with the current year in it.
 
-Hooks can also be very project specific such as:
+Hooks can be very project specific such as:
 
 - Verify that the project still builds
 - Verify that autotests matching the modified files still pass with no errors.
@@ -18,6 +30,11 @@ or very specific to one person such as:
 - Don't allow a push to a remote repository after 1am in case I break something and will be asleep.
 - Don't let me commit between 9-5 for projects in ~/personal/ as I shouldn't be working on them during work hours.
 
+For more details on the different Git hooks that can be installed checkout the online documentation at http://www.kernel.org/pub/software/scm/git/docs/githooks.html
+
+************************************
+Locations
+
 git-hooks provide a way to manage and share your hooks by allowing for the installation of hooks in three locations:
  - User hooks that are installed in ~/.git_hooks/
  - Project hooks that are installed in the git_hooks directory inside of each project.
@@ -25,9 +42,8 @@ git-hooks provide a way to manage and share your hooks by allowing for the insta
 
 Multiple global hooks directories can be specified by using a space between each path.
 
-For more details on Git Hooks checkout the online documentation at http://www.kernel.org/pub/software/scm/git/docs/githooks.html
-
---- Creating hooks
+************************************
+Creating hooks
 
 To keep things organized git-hooks looks for scripts in sub directories named after the git hook name.  For example this project has the following pre-commit script in the following location:
 
@@ -35,8 +51,3 @@ git_hooks/pre-commit/bsd
 
 When you run 'git hooks' with no arguments it will list all of the hooks installed on the system.  It will run the hooks with the --about argument to generate the description that is shown.  Checkout the hooks in contrib for some examples.
 
--- Install
-
-Clone the git-hooks repository and add the directory to your PATH environment variable so git-hooks will be detected.
-
-Inside a project's directory run 'git hooks --install' to change that projects git hooks to use git-hooks hooks.  'git hooks --uninstall' can be run at any time to go back to the old hooks that were installed before (usually the default which does nothing).
