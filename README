@@ -1,4 +1,4 @@
-git-hooks - A tool to manage Git hooks for multiple git repositories.
+git-hooks - A tool to manage project, user, and global Git hooks for multiple git repositories.
 
 git-hooks lets hooks be installed inside git repositories, users home directory, and globally.  When a hook is called by git, git-hooks will check each of these locations for the hooks to run.
 
