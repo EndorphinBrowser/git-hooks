@@ -110,9 +110,9 @@ function list_hooks
     done
     cat .git/hooks/pre-commit | grep 'git-hooks' > /dev/null 2> /dev/null
     if [ $? = 0 ] ; then
-        echo -n "Git hooks ARE installed in this project."
+        echo -n "Git hooks ARE installed in this repository."
     else
-        echo -n "Git hooks are NOT installed."
+        echo -n "Git hooks are NOT installed in this repository."
     fi
 
     echo '  Listing User, Project, and Global hooks:'
