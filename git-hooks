@@ -35,7 +35,7 @@ function hook_dirs
     fi
     echo "${HOME}/.git_hooks${hook}"
     echo "${PWD}/git_hooks${hook}"
-    echo "`git config hooks.global`"${hook}
+    eval echo "`git config hooks.global`"${hook}
 }
 
 function list_hooks_in_dir
