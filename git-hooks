@@ -111,10 +111,9 @@ git-hooks run "$0" "$@"' > "${file}"
 
 function list_hooks
 {
-    while [ ! -d ".git" ] ; do
-        cd ..
-    done
-    cat .git/hooks/pre-commit | grep 'git-hooks' > /dev/null 2> /dev/null
+    GITDIR=`git rev-parse --git-dir`
+    cd $GITDIR
+    cat hooks/pre-commit 2> /dev/null | grep 'git-hooks' > /dev/null 2> /dev/null
     if [ $? = 0 ] ; then
         echo "Git hooks ARE installed in this repository."
         echo ""
