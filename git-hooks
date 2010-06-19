@@ -40,7 +40,7 @@ function hook_dirs
 
 function list_hooks_in_dir
 {
-    find "${1}" -executable -type f 2>/dev/null | grep -v "^.$" | sort -V
+    find "${1}/" -executable -type f 2>/dev/null | grep -v "^.$" | sort -V
 }
 
 function run_hooks
