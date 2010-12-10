@@ -153,7 +153,7 @@ case $1 in
     --install|--uninstall )
         install_hooks "$1"
         ;;
-    -h|--help )
+    -h|--help|-? )
         echo 'Git Hooks'
         echo ''
         echo 'Options:'
