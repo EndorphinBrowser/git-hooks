@@ -43,8 +43,8 @@ function hook_dirs
 
 function list_hooks_in_dir
 {
-    if [ $OSTYPE = "darwin10.0" ] ; then
-        find "${1}/" -executable -type f 2>/dev/null | grep -v "^.$" | sort
+	  if [[ $OSTYPE =~ 'darwin' ]] ; then	
+        find "${1}/" -type f 2>/dev/null | grep -v "^.$" | sort
     else
         find "${1}/" -executable -type f 2>/dev/null | grep -v "^.$" | sort -V
     fi
