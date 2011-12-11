@@ -36,13 +36,7 @@ function run_test
 
 case "${1}" in
     --about )
-        echo -n "Spell check the commit message using aspell which is: "
-        which aspell > /dev/null
-        if [ ! $? -eq 0 ] ; then
-            echo "not installed"
-        else
-            echo "installed"
-        fi
+        echo -n "Checks commit message for presence of Signed-off-by line."
         ;;
     * )
         run_test "$@"
