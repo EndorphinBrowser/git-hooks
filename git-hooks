@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2010-2011, Benjamin C. Meyer <ben@meyerhome.net>
+# Copyright (c) 2010-2012, Benjamin C. Meyer <ben@meyerhome.net>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,7 @@ function hook_dirs
 
 function list_hooks_in_dir
 {
-	  if [[ $OSTYPE =~ 'darwin' ]] ; then	
+    if [[ $OSTYPE =~ 'darwin' ]] ; then
         find "${1}/" -type f 2>/dev/null | grep -v "^.$" | sort
     else
         find "${1}/" -executable -type f 2>/dev/null | grep -v "^.$" | sort -V
