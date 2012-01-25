@@ -43,7 +43,7 @@ function hook_dirs
 
 function list_hooks_in_dir
 {
-    find "${1}/" -perm +111 -type f 2>/dev/null | grep -v "^.$" | sort
+    find "${1}/" -L -perm +111 -type f 2>/dev/null | grep -v "^.$" | sort
 }
 
 function run_hooks
