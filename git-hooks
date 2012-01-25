@@ -43,11 +43,7 @@ function hook_dirs
 
 function list_hooks_in_dir
 {
-    if [[ $OSTYPE =~ 'darwin' ]] ; then
-        find "${1}/" -type f 2>/dev/null | grep -v "^.$" | sort
-    else
-        find "${1}/" -executable -type f 2>/dev/null | grep -v "^.$" | sort -V
-    fi
+    find "${1}/" -perm +111 -type f 2>/dev/null | grep -v "^.$" | sort
 }
 
 function run_hooks
