@@ -43,7 +43,9 @@ function hook_dirs
 
 function list_hooks_in_dir
 {
-    find -L "${1}/" -perm +111 -type f 2>/dev/null | grep -v "^.$" | sort
+    path="${1}"
+    level="${2}"
+    find -L "${path}/" -mindepth ${level} -maxdepth ${level} -perm +111 -type f 2>/dev/null | grep -v "^.$" | sort
 }
 
 function run_hooks
@@ -54,7 +56,7 @@ function run_hooks
         return 1
     fi
     shift 1
-    for hook in `list_hooks_in_dir "${dir}"`
+    for hook in `list_hooks_in_dir "${dir}" 1`
     do
         export last_run_hook="${hook} $@"
         if [ ! -z ${GIT_HOOKS_VERBOSE} ] ; then
@@ -132,7 +134,7 @@ function list_hooks
     echo '---'
     for dir in `hook_dirs`; do
         echo "${dir}:"
-        for hook in `list_hooks_in_dir "${dir}"` ; do
+        for hook in `list_hooks_in_dir "${dir}" 2` ; do
             echo -n `basename \`dirname "${hook}"\``
             echo -e "/`basename "${hook}"` \t- `${hook} --about`"
         done
