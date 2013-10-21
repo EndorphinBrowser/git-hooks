@@ -102,7 +102,7 @@ function install_hooks
         cd hooks
         for file in applypatch-msg commit-msg post-applypatch post-checkout post-commit post-merge post-receive pre-applypatch pre-auto-gc pre-commit prepare-commit-msg pre-rebase pre-receive update pre-push
         do
-            echo '#!/bin/bash
+            echo '#!/usr/bin/env bash
 git-hooks run "$0" "$@"' > "${file}"
             chmod +x "${file}"
         done
