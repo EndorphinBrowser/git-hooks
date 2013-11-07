@@ -95,6 +95,23 @@ function run_hook
     set +e
 }
 
+function install_hooks_into
+{
+    DIR=$1
+    cd "${DIR}"
+
+    set -e
+    mv hooks hooks.old
+    set +e
+    mkdir hooks
+    cd hooks
+    for file in applypatch-msg commit-msg post-applypatch post-checkout post-commit post-merge post-receive pre-applypatch pre-auto-gc pre-commit prepare-commit-msg pre-rebase pre-receive update pre-push
+    do
+        echo "${2}" > "${file}"
+        chmod +x "${file}"
+    done
+}
+
 function install_hooks
 {
     GITDIR=`git rev-parse --git-dir`
@@ -108,17 +125,9 @@ function install_hooks
             echo "hooks.old already exists, perhaps you already installed?"
             return 1
         fi
-        set -e
-        mv hooks hooks.old
-        set +e
-        mkdir hooks
-        cd hooks
-        for file in applypatch-msg commit-msg post-applypatch post-checkout post-commit post-merge post-receive pre-applypatch pre-auto-gc pre-commit prepare-commit-msg pre-rebase pre-receive update pre-push
-        do
-            echo '#!/usr/bin/env bash
-git-hooks run "$0" "$@"' > "${file}"
-            chmod +x "${file}"
-        done
+    cmd='#!/usr/bin/env bash
+git-hooks run "$0" "$@"';
+    install_hooks_into "${PWD}" "${cmd}"
     else
         if [ ! -d hooks.old ] ; then
             echo "Error, hooks.old doesn't exists, aborting uninstall to not destroy something"
@@ -158,6 +167,28 @@ function report_error {
     exit 1
 }
 
+function installglobal {
+    TEMPLATE="$HOME/.git-template-with-git-hooks"
+    if [ ! -d "${TEMPLATE}" ] ; then
+        DEFAULT=/usr/share/git-core/templates
+        if [ -d ${DEFAULT} ] ; then
+            cp -rf /usr/share/git-core/templates "${TEMPLATE}"
+        else
+            mkdir -p "${TEMPLATE}/hooks"
+        fi
+        cmd="#!/usr/bin/env bash
+echo \"git hooks not installed in this repository.  Run 'git hooks --install' to install it or 'git hooks -h' for more information.\"";
+        install_hooks_into "${TEMPLATE}" "${cmd}"
+        mv "${TEMPLATE}/hooks.old" "${TEMPLATE}/hooks.original"
+    fi
+    git config --global init.templatedir "${TEMPLATE}"
+    echo "Git global config init.templatedir is now set to ${TEMPLATE}"
+}
+
+function uninstallglobal {
+    git config --global --unset init.templatedir
+}
+
 case $1 in
     run )
         if [ ! -z "${GIT_DIR}" ] ; then
@@ -170,14 +201,28 @@ case $1 in
     --install|--uninstall )
         install_hooks "$1"
         ;;
+    --installglobal )
+        installglobal
+        ;;
+    --uninstallglobal )
+        uninstallglobal
+        ;;
     -h|--help|-? )
         echo 'Git Hooks'
+        echo '    A tool to manage project, user, and global Git hooks for multiple git repositories.'
+        echo '    https://github.com/icefox/git-hooks'
         echo ''
         echo 'Options:'
         echo '    --install      Replace existing hooks in this repository with a call to'
         echo '                   git hooks run [hook].  Move old hooks directory to hooks.old'
         echo '    --uninstall    Remove existing hooks in this repository and rename hooks.old'
         echo '                   back to hooks'
+        echo '    --installglobal'
+        echo '                   Create a template .git directory that that will be used whenever'
+        echo '                   a git repository is created or cloned that will remind the user'
+        echo '                   to install git-hooks.'
+        echo '    --uninstallglobal'
+        echo '                   Turn off the global .git directory template that has the reminder.'
         echo "    run [cmd]      Run the hooks for cmd (such as pre-commit)"
         echo "    (no arguments) Show currently installed hooks"
         ;;
