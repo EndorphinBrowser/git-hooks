@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2010, Benjamin C. Meyer <ben@meyerhome.net>
+# Copyright (c) 2010-2014, Benjamin C. Meyer <ben@meyerhome.net>
 # Copyright (c) 2013, Phil Black-Knight <pblack88@gmail.com>
 # All rights reserved.
 #
@@ -29,6 +29,9 @@
 
 function test_file {
     file="${1}"
+    if [ ! -f "${file}" ] ; then
+        return
+    fi
     if grep 'Copyright ' "${file}" | grep -v grep >/dev/null
     then
         year=`date +%Y`
