@@ -205,10 +205,10 @@ case $1 in
     --install|--uninstall )
         install_hooks "$1"
         ;;
-    --installglobal )
+    --install-global|--installglobal )
         install_global
         ;;
-    --uninstallglobal )
+    --uninstall-global|--uninstallglobal )
         uninstall_global
         ;;
     -h|--help|-? )
@@ -221,13 +221,13 @@ case $1 in
         echo '                   git hooks run [hook].  Move old hooks directory to hooks.old'
         echo '    --uninstall    Remove existing hooks in this repository and rename hooks.old'
         echo '                   back to hooks'
-        echo '    --installglobal'
+        echo '    --install-global'
         echo '                   Create a template .git directory that that will be used whenever'
         echo '                   a git repository is created or cloned that will remind the user'
         echo '                   to install git-hooks.'
-        echo '    --uninstallglobal'
+        echo '    --uninstall-global'
         echo '                   Turn off the global .git directory template that has the reminder.'
-        echo "    run [cmd]      Run the hooks for cmd (such as pre-commit)"
+        echo "    run <cmd>      Run the hooks for <cmd> (such as pre-commit)"
         echo "    (no arguments) Show currently installed hooks"
         ;;
     * )
