@@ -162,7 +162,7 @@ git-hooks run "$0" "$@"';
     fi
 }
 
-function installglobal 
+function install_global 
 {
     TEMPLATE="$HOME/.git-template-with-git-hooks"
     if [ ! -d "${TEMPLATE}" ] ; then
@@ -181,7 +181,7 @@ echo \"git hooks not installed in this repository.  Run 'git hooks --install' to
     echo "Git global config init.templatedir is now set to ${TEMPLATE}"
 }
 
-function uninstallglobal 
+function uninstall_global 
 {
     git config --global --unset init.templatedir
 }
@@ -206,10 +206,10 @@ case $1 in
         install_hooks "$1"
         ;;
     --installglobal )
-        installglobal
+        install_global
         ;;
     --uninstallglobal )
-        uninstallglobal
+        uninstall_global
         ;;
     -h|--help|-? )
         echo 'Git Hooks'
