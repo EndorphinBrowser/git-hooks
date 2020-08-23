@@ -65,7 +65,7 @@ function list_hooks
         echo "Git hooks ARE installed in this repository."
         echo ""
     else
-        echo "Git hooks are NOT installed in this repository. (Run 'git hooks --install' to install it)"
+        echo "Git hooks are NOT installed in this repository. (Run 'git hooks install' to install it)"
         echo ""
     fi
 
@@ -144,7 +144,7 @@ function install_hooks
         return 1
     fi
     cd "${GITDIR}"
-    if [ "${1}" = "--install" ] ; then
+    if [ "${1}" = "install" ] ; then
         if [ -d hooks.old ] ; then
             echo "hooks.old already exists, perhaps you already installed?"
             return 1
@@ -202,35 +202,36 @@ case $1 in
         trap report_error ERR
         run_hook "$@"
         ;;
-    --install|--uninstall )
+    install|uninstall )
         install_hooks "$1"
         ;;
-    --install-global|--installglobal )
+    install-global|installglobal )
         install_global
         ;;
-    --uninstall-global|--uninstallglobal )
+    uninstall-global|uninstallglobal )
         uninstall_global
         ;;
-    -h|--help|-? )
+    show )
+        list_hooks
+        ;;
+
+    * )
         echo 'Git Hooks'
         echo '    A tool to manage project, user, and global Git hooks for multiple git repositories.'
-        echo '    https://github.com/icefox/git-hooks'
+        echo '    https://github.com/AaronDewes/git-hooks'
         echo ''
         echo 'Options:'
-        echo '    --install      Replace existing hooks in this repository with a call to'
+        echo '    install        Replace existing hooks in this repository with a call to'
         echo '                   git hooks run [hook].  Move old hooks directory to hooks.old'
-        echo '    --uninstall    Remove existing hooks in this repository and rename hooks.old'
+        echo '    uninstall      Remove existing hooks in this repository and rename hooks.old'
         echo '                   back to hooks'
-        echo '    --install-global'
+        echo '    install-global'
         echo '                   Create a template .git directory that that will be used whenever'
         echo '                   a git repository is created or cloned that will remind the user'
         echo '                   to install git-hooks.'
-        echo '    --uninstall-global'
+        echo '    uninstall-global'
         echo '                   Turn off the global .git directory template that has the reminder.'
         echo "    run <cmd>      Run the hooks for <cmd> (such as pre-commit)"
-        echo "    (no arguments) Show currently installed hooks"
-        ;;
-    * )
-        list_hooks
+        echo "    show           Show currently installed hooks"
         ;;
 esac

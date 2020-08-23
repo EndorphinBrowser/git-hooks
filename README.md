@@ -9,9 +9,9 @@ Install
 
 Add git-hooks to your `PATH` environment variable so `git hooks` can be run.
 
-Run `git hooks --install` in a git project tell it to use git-hooks hooks.  You can run `git hooks --uninstall` at any time to revert to your previous hooks.  (These are usually the default hooks, which do nothing.)
+Run `git hooks install` in a git project tell it to use git-hooks hooks.  You can run `git hooks uninstall` at any time to revert to your previous hooks.  (These are usually the default hooks, which do nothing.)
 
-Run `git hooks --installglobal` to force any new git repository or any git repository you clone to have a reminder to install git hooks. (It can't be on by default for security reasons.)
+Run `git hooks installglobal` to force any new git repository or any git repository you clone to have a reminder to install git hooks. (It can't be on by default for security reasons.)
 
 
 Overview
